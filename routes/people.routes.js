@@ -13,7 +13,7 @@ router.get("/", async (req, res)=>{
 
 router.post("/create",async (req, res)=>{
   try {
-    const newUser =await PeopleControllers.createPeople(req.params);
+    const newUser =await PeopleControllers.createPeople(req.body);
     res.send(newUser);
   } catch (error) {
     console.log("Error");
@@ -21,9 +21,10 @@ router.post("/create",async (req, res)=>{
 });
 
 
-router.put("/edit",async (req, res)=>{
+router.put("/edit/:id",async (req, res)=>{
   try {
-    const editUser =await PeopleControllers.editUser(req.params);
+    const id = req.params.id;
+    const editUser =await PeopleControllers.editUser(id,req.body);
     res.send(editUser);
   } catch (error) {
     console.log("Error");
