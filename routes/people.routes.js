@@ -11,7 +11,6 @@ router.get("/", async (req, res)=>{
   }
 });
 
-
 router.post("/create",async (req, res)=>{
   try {
     const newUser =await PeopleControllers.createPeople(req.params);

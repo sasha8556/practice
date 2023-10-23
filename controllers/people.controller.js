@@ -1,12 +1,6 @@
 const PeopleService = require("../services/people.services");
 
 class PeopleControllers {
-  // constructor(id, name, age, isMan) {
-  //   this.id = id;
-  //   this.name = name;
-  //   this.age = age;
-  //   this.isMan = isMan;
-  // }
   async getPeople() {
     let people = await PeopleService.getPeople();
     return people;
@@ -25,7 +19,5 @@ class PeopleControllers {
   }
 }
 
-// const user1 = new PeopleControllers(1, "Sasha", 26, false);
 
-// const people = [user1];
 module.exports = new PeopleControllers();
