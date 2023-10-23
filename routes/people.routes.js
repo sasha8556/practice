@@ -11,6 +11,7 @@ router.get("/", async (req, res)=>{
   }
 });
 
+
 router.post("/create",async (req, res)=>{
   try {
     const newUser =await PeopleControllers.createPeople(req.params);
@@ -29,6 +30,7 @@ router.put("/edit",async (req, res)=>{
     console.log("Error");
   }
 });
+
 
 router.delete("/delete/:id",async (req, res)=>{
   try {
