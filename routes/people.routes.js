@@ -34,9 +34,9 @@ router.put("/edit/:id",async (req, res)=>{
 
 router.delete("/delete/:id",async (req, res)=>{
   try {
-    const id = req.params.id;
-    await PeopleControllers.deleteUser(id)
-    res.send();
+    const id = +req.params.id;
+   const updatedPeople= await PeopleControllers.deleteUser(id)
+    res.send(updatedPeople);
   } catch (error) {
     console.log("Error");
   }

@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 class People {
   constructor(id, name, age, isMan) {
     this.id = id;
@@ -16,21 +18,51 @@ const people = [user1, user2, user3, user4, user5];
 
 class PeopleServices {
   getPeople() {
+    console.log("first");
     return new Promise((resolve, reject) => {
-      resolve(people);
+     fs.readFile("data.json", "utf8", function (error, data) {
+        console.log("Second");
+        if (error) {
+          reject(error);
+        } else {
+          // const obj = JSON.parse(data);
+          resolve(data);
+        }
+      });
+      console.log("last");
     });
   }
   createPeople(newUser) {
     return new Promise((resolve, reject) => {
-      people.push(newUser);
-      resolve(people);
+      let data = fs.readFile("data.json", "utf8", function (error, data) {
+        console.log(data);
+        if (error) {
+          reject(error);
+        } else {
+          const obj = JSON.parse(data);
+          console.log(obj);
+          obj.push(newUser);
+          console.log(obj);
+          fs.writeFile(
+            "data.json",
+            JSON.stringify(obj, null, 3),
+            function (error, data) {
+              if (error) {
+                reject(error);
+              } else {
+                resolve();
+              }
+            }
+          );
+        }
+      });
     });
   }
-  editUser() {
+  editUser(id, userData) {
     return new Promise((resolve, reject) => {
       const index = people.findIndex((pet) => pet.id === id);
-      const updatedUsers = { ...people[index], ...userData};
-      pets.splice(index,1,updatedUsers);
+      const updatedUsers = { ...people[index], ...userData };
+      people.splice(index, 1, updatedUsers);
       resolve(updatedUsers);
     });
   }
@@ -38,6 +70,7 @@ class PeopleServices {
     return new Promise((resolve, reject) => {
       const index = people.findIndex((user) => user.id === id);
       people.splice(index, 1);
+      console.log(index);
       resolve(people);
     });
   }
