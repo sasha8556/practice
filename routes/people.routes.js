@@ -23,7 +23,7 @@ router.post("/create",async (req, res)=>{
 
 router.put("/edit/:id",async (req, res)=>{
   try {
-    const id = req.params.id;
+    const id = +req.params.id;
     const editUser =await PeopleControllers.editUser(id,req.body);
     res.send(editUser);
   } catch (error) {
