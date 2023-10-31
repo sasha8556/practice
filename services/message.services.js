@@ -1,7 +1,7 @@
 const fs = require("fs");
 
-class PeopleServices {
-  getPeople() {
+class MessageServices {
+  getMessage() {
     return new Promise((resolve, reject) => {
       fs.readFile("data.json", "utf8", function (error, data) {
         if (error) {
@@ -13,7 +13,7 @@ class PeopleServices {
       });
     });
   }
-  createPeople(newUser) {
+  createMessage(newMessage) {
     return new Promise((resolve, reject) => {
       let data = fs.readFile("data.json", "utf8", function (error, data) {
         console.log(data);
@@ -22,7 +22,7 @@ class PeopleServices {
         } else {
           const obj = JSON.parse(data);
           console.log(obj);
-          obj.push(newUser);
+          obj.push(newMessage);
           console.log(obj);
           fs.writeFile(
             "data.json",
@@ -39,19 +39,19 @@ class PeopleServices {
       });
     });
   }
-  editUser(id, userData) {
+  editMessage(id, messageData) {
     return new Promise((resolve, reject) => {
       fs.readFile("data.json", "utf8", (error, data) => {
         if (error) {
           reject(error);
         } else {
           const obj = JSON.parse(data);
-          const index = obj.findIndex((user) => user.id === id);
+          const index = obj.findIndex((message) => message.id === id);
           if (index === -1) {
             reject("Индекс не найден");
           } else {
-            const updatedUser = { ...obj[index], ...userData };
-            obj[index] = updatedUser;
+            const updatedMessage = { ...obj[index], ...messageData };
+            obj[index] = updatedMessage;
 
             fs.writeFile(
               "data.json",
@@ -61,7 +61,7 @@ class PeopleServices {
                 if (error) {
                   reject(error);
                 } else {
-                  resolve(updatedUser);
+                  resolve(updatedMessage);
                 }
               }
             );
@@ -71,14 +71,14 @@ class PeopleServices {
     });
   }
 
-  deleteUser(id) {
+  deleteMessage(id) {
     return new Promise((resolve, reject) => {
       fs.readFile("data.json", "utf8", (error, data) => {
         if (error) {
           reject(error);
         } else {
           const obj = JSON.parse(data);
-          const index = obj.findIndex((user) => user.id === id);
+          const index = obj.findIndex((message) => message.id === id);
           if (index === -1) {
             reject("Индекс не найден");
           } else {
@@ -101,4 +101,4 @@ class PeopleServices {
     });
   }
 }
-module.exports = new PeopleServices();
+module.exports = new MessageServices();
