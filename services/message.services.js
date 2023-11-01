@@ -8,7 +8,8 @@ class MessageServices {
           reject(error);
         } else {
           const obj = JSON.parse(data);
-          resolve(obj);
+          const newObj = obj.filter((item) => item.message);
+          resolve(newObj);
         }
       });
     });
