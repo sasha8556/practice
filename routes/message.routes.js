@@ -49,6 +49,35 @@ router.post("/create", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/message/edit/{id}:
+ *   put:
+ *     summary: Update message
+ *     description: Updates message data by their ID.
+ *     parameters:
+ *       - name: message
+ *         in: body
+ *         required: false
+ *         schema:
+ *           type: string
+ *           example:  {"id":1,"message":"Hello"}
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer      
+ *     responses:
+ *       200:
+ *          description: Message data updated successfully.
+ *       400:
+ *         description: Bad request. Please check your input data.
+ *       404:
+ *         description: Message with the specified ID not found.
+ *       500:
+ *         description: Internal server error. Please try the request again later.
+ */
+
 
 
 router.put("/edit/:id", async (req, res) => {
@@ -60,6 +89,25 @@ router.put("/edit/:id", async (req, res) => {
     console.log("Error");
   }
 });
+
+
+/**
+ * @swagger
+ * /api/message/delete/{id}:
+ *   delete:
+ *     summary: Delete message
+ *     description: Delete message data by their ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       204:
+ *         description: Пользователь успешно удален.
+ */
+
 
 router.delete("/delete/:id", async (req, res) => {
   try {

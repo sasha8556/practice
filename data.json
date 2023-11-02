@@ -10,12 +10,5 @@
       "name": "Andrei",
       "age": 4,
       "isMan": true
-   },
-   {
-      "id": 3,
-      "message": "Hello"
-   },
-   {
-      "message": "new message"
    }
 ]
